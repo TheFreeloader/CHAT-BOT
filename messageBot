@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NCF PET SHOP</title>
+  <script src="{{asset('plugins/jquery.min.js')}}"></script>
+  <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap.min.css')}}">
+  <script type="text/javascript" src="{{asset('plugins/bootstrap.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('plugins/78b50b35e0.js')}}" crossorigin="anonymous" ></script>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
+  <style type="text/css">
+    *{
+      margin:0;
+      padding:0;
+      font-family: aileron;
+      color:white;
+    }
+    @keyframes rainbow-text-animation {
+      0% {
+        background-size: 57%;
+        background-position: 0 0;
+      }
+      20% {
+        background-size: 57%;
+        background-position: 0 1em;
+      }
+      100% {
+        background-size: 300%;
+        background-position: -9em 1em;
+      }
+    }
+    @keyframes rainbow-text-animation-rev {
+      0% {
+        background-size: 300%;
+        background-position: -9em 1em;
+      }
+      20% {
+        background-size: 57%;
+        background-position: 0 1em;
+      }
+      100% {
+        background-size: 57%;
+        background-position: 0 0;
+      }
+    }
+
+    @font-face
+    {
+      font-family: bts;
+      src:url("{{asset('fonts/bts.ttf')}}");
+    }
+    @font-face
+    {
+      font-family: quartzo;
+      src:url("{{asset('fonts/quartzo.ttf')}}");
+    }
+    @font-face
+    {
+      font-family: organical;
+      src:url("{{asset('fonts/organical.ttf')}}");
+    }
+    @font-face
+    {
+      font-family: aquaFont;
+      src:url("{{asset('fonts/aqua.ttf')}}");
+    }
+
+    ::-webkit-scrollbar
+    {
+      width: 10px;
+      border-radius: 25px;
+    }
+    ::-webkit-scrollbar-track
+    {
+      background:#F1DFF4;
+      box-shadow: inset 0 0 5px grey;
+    }
+    ::-webkit-scrollbar-thumb
+    {
+      background:violet;
+    }
+    ::-webkit-scrollbar-thumb:hover
+    {
+      background: linear-gradient(#6709BA,#E460F8);
+    }
+    body
+    {
+      background-image: url("{{asset('Images/fish.gif')}}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      max-height:100%;
+    }
+    .wrapper
+    {
+      top: 0;
+      width: 100%;
+    }
+    .wrapper .navbar
+    {
+      height: 70px;
+    }
+    .wrapper2
+    {
+      float: right;
+      margin-top: -25px;
+    }
+    .wrapper2 a
+    {
+      color: #3b4545;
+      font-family: bts;
+      font-size: 75px;
+      background-color: #f3ec78;
+      background: conic-gradient(
+        #CA4246 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #8B9862 66.666%, 
+        #476098 66.666%, 
+        #476098 83.333%, 
+        #A7489B 83.333%);
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-text-animation-rev 0.5s ease forwards;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .wrapper2 a:hover {
+      animation: rainbow-text-animation 0.5s ease-out;
+    }
+    .cont
+    {
+      position: fixed;
+      width:100%;
+      height:100%;
+      margin:25px;
+      margin-top:16%;
+      justify-content:center;
+    }
+    .cont .welcomeTitle
+    {
+      font-size: 100px;
+      text-align: center;
+    }
+    .cont .welcomeTitle p
+    {
+      font-family: aquaFont;
+      background: conic-gradient(
+        #A7489B 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #940fd6 66.666%, 
+        #476098 66.666%, 
+        #c40e78 83.333%, 
+        #CA4246 83.333%);
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-text-animation-rev 0.5s ease forwards;
+      cursor: pointer;
+    }
+    .cont .welcomeTitle p:hover
+    {
+      animation: rainbow-text-animation 0.5s ease;
+    }
+    .message_icon
+    {
+      position: fixed;
+      right: 155px;
+      bottom: 0;
+      background-color: #7fffd4;
+      cursor: pointer;
+      z-index: 1000;
+      border:5px double green;
+      border-radius: 50%;
+    }
+    .message_icon:hover
+    {
+      background: conic-gradient(
+        #A7489B 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #940fd6 66.666%, 
+        #476098 66.666%, 
+        #c40e78 83.333%, 
+        #CA4246 83.333%);
+      border:2px double transparent;
+    }
+    .message_box
+    {
+      position: fixed;
+      right: 20px;
+      bottom: 100px;
+      width: 400px;
+      height: 75vh;
+      background-image: url("{{asset('Images/message_box.png')}}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 1000;
+      transition: all 0.5s ease-out;
+      transform: scaleY(0);
+      border-radius: 8%;
+    }
+    .message_box.active
+    {
+      transform: scaleY(1);
+    }
+    .message_box .form
+    {
+      min-height: 50vh;
+      max-height: 50vh;
+      padding: 20px 15px;
+      overflow-y: auto;
+    }
+    .message_box .title
+    {
+      background-color:#adecff;
+      line-height: 60px;
+      border-radius: 5px 5px 0 0;
+      border-bottom:1px solid gray;
+    }
+    center
+    {
+      font-family:aquaFont;
+      font-size: 40px;
+      background-color: #f3ec78;
+      background: conic-gradient(
+        #CA4246 16.666%, 
+        #E16541 16.666%, 
+        #E16541 33.333%, 
+        #F18F43 33.333%, 
+        #F18F43 50%, 
+        #8B9862 50%, 
+        #8B9862 66.666%, 
+        #476098 66.666%, 
+        #476098 83.333%, 
+        #A7489B 83.333%);
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+      animation: rainbow-text-animation-rev 0.5s ease forwards;
+      cursor: pointer;
+    }
+    center:hover {
+      animation: rainbow-text-animation 0.5s ease forwards;
+    }
+    .message_box .form .inbox
+    {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+    }
+    .message_box .form .user-inbox
+    {
+      justify-content: flex-end;
+      margin:13px 0;
+    }
+    .message_box .form .inbox .msg-header
+    {
+      max-width: 53%;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    .form .inbox .msg-header p
+    {
+      background: linear-gradient(#10F8D7,#D0A6F5);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 14px;
+      word-break: break-all;
+    }
+    .form .user-inbox .msg-header p
+    {
+      background-image:linear-gradient(140deg,#c70c9e,#e6bec3);
+    }
+    .message_box .typing-field
+    {
+      display: flex;
+      height: 25%;
+      width: 100%;
+      /* background-image:linear-gradient(90deg,#b6eefa,#153acf,#0428ba,#11768c); */
+      background-image: linear-gradient(140deg, #83EAF1 0%,#63A4FF 2%, #647DEE 50%, #7F53AC 75%);
+      border-top: 1px solid gray;
+      border-radius: 0 0 20% 20%;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+    .message_box .typing-field .input-data
+    {
+      height: 55px;
+      width: 335px;
+      color: black;
+      position: relative;
+    }
+    .message_box .typing-field .input-data input
+    {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: 1px solid transparent;
+      font-size: 15px;
+      border-radius: 5px 5px 5px 5px;
+      padding:0 80px 0 14px;
+    }
+    .message_box .typing-field .input-data input:focus
+    {
+      border-color: rgba(0,123,255,0.8);
+    }
+    .input-data input::placeholder
+    {
+      color: #F9BCD1;
+      transition: all 0.3 ease;
+    }
+    .input-data input:focus::placeholder
+    {
+      color:#6dbfe8;
+    }
+    .message_box .typing-field .input-data button
+    {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      height: 50px;
+      width: 65px;
+      background: #BCF9D2;
+      font-size: 20px;
+      border-radius: 3px;
+      border: 1px solid pink;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+      font-family: monospace;
+    }
+
+    .message_box .typing-field .input-data input:valid~button
+    {
+      opacity: 1;
+      pointer-events:auto;
+    }
+    .typing-field .input-data button:hover
+    {
+      background: linear-gradient(#F9C5BC,#E4BCF9);
+      cursor: pointer;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <div class="wrapper navbar-fixed-top">
+    <nav class="navbar" style="background:linear-gradient(#5a68d6,#8ee5e8)">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <img src="{{asset('Images/nav.png')}}" height="60px" >
+        </div>
+        <div class="wrapper2">
+          <a href="{{url('/main')}}">Home</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container-fluid cont">
+    <div class="welcomeTitle">
+      <p>
+        Welcome to NCF<br> PET SHOP
+      </p>
+    </div>
+  </div>
+  <div class="message_icon" id="message_icon">
+    <i><img src="{{asset('Images/tigerShark.png')}}"height="100px" width="100px"></i>
+  </div>
+  <div class="message_box" id="message_box">
+    <div class="title">
+      <center>NCF PET SHOP</center>
+    </div>
+    <div class="form">
+      <div class="bot-inbox inbox">
+        <div class="bot_icon">
+          <i><img src="{{asset('Images/tigerShark.png')}}" height="50px" width="50px" style="border:2px double green;background-color: #7fffd4;border-radius: 50%"></i>
+        </div>
+        <div class="msg-header">
+          <p style="color: black;font-family: monospace;">How can I serve you <br> Master</p>
+        </div>
+      </div>
+    </div>
+    <div class="typing-field">
+      <div class="input-data">
+        <input type="text" id="data" placeholder="Type Something Here.."required>
+        <button id="send-button" style="color: black">Send</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    $(document).ready(function()
+    {
+      $('#message_icon').click(function(event)
+      {
+        $('#message_box').toggleClass('active');
+      });
+    })
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $(document).ready(function()
+    {
+      $('#send-button').on("click",function()
+      {
+        $value=$("#data").val();
+        $msg ='<div class="user-inbox inbox"><div class="msg-header"><p style="color: black;font-family: monospace;">'+ $value +'</p></div><div class="user_icon"><i><img src="{{asset('Images/corgiT.png')}}" height="50px" width="50px" style="border:2px double green;background-color: pink;border-radius: 50%"></i></div></div>';
+        $(".form").append($msg);
+        $("#data").val('');
+      // start ajax code
+      $.ajax({
+        url:'display_message',
+        type: 'POST',
+        data: 'text='+$value,
+        success:function(result)
+        {
+          $reply='<div class="bot-inbox inbox"><div class="bot_icon"><i><img src="{{asset('Images/tigerShark.png')}}" height="50px" width="50px" style="border:2px double green;background-color: #7fffd4;border-radius: 50%"></i></div><div class="msg-header"><p style="color: black;font-family: monospace;">'+ result +'</p></div></div>';
+          $(".form").append($reply);
+          //when message goes down it automaticaly scrolls down
+          $(".form").scrollTop($(".form")[0].scrollHeight);
+        }
+      });
+    });
+    })
+  </script>
+</body>
+</html>
