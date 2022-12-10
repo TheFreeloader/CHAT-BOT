@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\ISModel;
+
+class ISController extends Controller
+{
+    public function display_message()
+    {
+        return $result= ISModel::DisplayMessage();
+    }
+}
+
