@@ -9,89 +9,9 @@ use Auth;
 
 class MainController extends Controller
 {
-    function index()
-    {
-     return view('login');
-    }
-
-    function checklogin(Request $request)
-    {
-     $this->validate($request, 
-     	[
-      'email'   => 'required|email',
-      'password'  => 'required'
-        ]
-     );
-
-     $user_data = array(
-      'email'  => $request->get('email'),
-      'password' => $request->get('password')
-     );
-
-     if(Auth::attempt($user_data))
-     {
-     	if(Auth::user()->role_id=='2')
-     	{
-     		return redirect('/main/manager');
-     	}
-     	elseif(Auth::user()->role_id=='1')
-     	{
-     		return redirect('/main/administrator');
-     	}
-     	elseif(Auth::user()->role_id=='3')
-     	{
-     		return redirect('/main/tabulator');
-     	}
-     }
-     else
-     {
-      return back()->with('error', 'Wrong Login Details');
-     }
-    }
-
-    function logout()
-    {
-     Auth::logout();
-     return redirect('/main');
-    }
-    function try_hash()
-    {
-    	$hash = PASSWORD_HASH('56789',PASSWORD_DEFAULT);
-    	echo $hash;
-    }
-
-    function administrator()
-    {
-        $role =ISModel::retrieveRole();
-        $category = ISModel::retrieveCatId();
-    	return view('administrator')
-        ->with(compact('role'))
-        ->with(compact('category'));
-    }
-
-    function manager()
-    {
-    	return view('manager');
-    }
-    function tabulator()
-    {
-        return view('tabulator');
-    }
-    function check()
-    {
-    	return view('check');
-    }
-    function SpellChecker()
-    {
-        return view('spellCheck');
-    }
     function messageBot()
     {
         return view('messageBot');
-    }
-    function messages()
-    {
-        return view('messages');
     }
 }
 ?>
